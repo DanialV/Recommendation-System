@@ -127,8 +127,7 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
 /*-- //header --*/
 /*-- nav --*/
 .navbar-default {
-    background: none;
-    border: none;
+
 }
 .navbar {
     margin-bottom: 0;
@@ -148,11 +147,8 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
     padding: 0;
 }
 .movies_nav {
-    background: #FF8D1B;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #fff;
-    text-transform: uppercase;
 }
 .navbar-nav > li {
     float: left;
