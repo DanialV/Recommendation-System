@@ -5,15 +5,12 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 html, body{
-  font-size: 100%;
 	background:#ffffff;
 }
 ul li,ol li{
-	font-size:14px;
 }
 p{
 	margin:0;
-	font-size:0.9em;
 }
 h1,h2,h3,h4,h5,h6,a{
 	margin:0;
@@ -153,7 +150,6 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
 .navbar-nav > li {
     float: left;
     border-right: 1px dotted #fff;
-    width:14.27%;
     text-align: center;
 }
 .w3_home_act{

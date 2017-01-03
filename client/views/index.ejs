@@ -10,7 +10,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../bower/toastr/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/my_style.css" rel='stylesheet' type='text/css' />
 
 <!-- <link href="css/bootstrap_rtl.css" rel="stylesheet" type="text/css" media="all" /> -->
@@ -26,7 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="../css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //pop-up -->
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../bower/font-awesome/css/font-awesome.min.css" />
 <!-- //font-awesome icons -->
 <!-- js -->
 <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
@@ -64,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- start-smoth-scrolling -->
 </head>
 
-<body>
+<body ng-controller="main_controller" ng-cloak>
 <!-- header -->
 
 <!-- //header -->
@@ -85,20 +86,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							  </div>
 							  <div class="form">
 								<h3 class="pull-right">به حساب کاربری خود وارد شوید</h3>
-								<form action="#" method="post">
-								  <input dir="rtl" type="text" name="Username" placeholder="نام کاربری" required="">
-								  <input dir="rtl" type="password" name="Password" placeholder="کلمه عبور" required="">
-								  <input type="submit" value="ورود">
+								<form method="post" ng-submit="send_login()">
+								  <input dir="rtl" ng-model="login_data.username" type="text" name="Username" placeholder="نام کاربری" required="">
+								  <input dir="rtl" ng-model="login_data.password" type="password" name="Password" placeholder="کلمه عبور" required="">
+								  <input type="submit"  value="ورود" >
 								</form>
 							  </div>
 							  <div class="form">
 								<h3 class="pull-right">ایجاد حساب جدید</h3>
-								<form action="#" method="post">
-								  <input dir="rtl" type="text" name="Username" placeholder="نام کاربری" required="">
-								  <input dir="rtl" type="password" name="Password" placeholder="رمز عبور" required="">
-								  <input dir="rtl" type="email" name="Email" placeholder="ادرس ایمیل" required="">
-								  <input dir="rtl" type="text" name="Phone" placeholder="شماره تلفن" required="">
-								  <input dir="rtl" type="submit" value="ثبت نام">
+								<form  method="post" ng-submit="send_enroll()">
+									<input dir="rtl" ng-model="enroll_data.first_name" type="text" placeholder="نام" required	>
+									<input dir="rtl" ng-model="enroll_data.last_name" type="text"  placeholder="نام خانوادگی" required>
+								  <input dir="rtl" ng-model="enroll_data.username" type="text"  placeholder="نام کاربری" required>
+								  <input dir="rtl" ng-model="enroll_data.password" type="password"  placeholder="رمز عبور" required>
+								  <input dir="rtl" ng-model="enroll_data.email" type="email"  placeholder="ادرس ایمیل" required>
+								  <input type="submit" value="ثبت نام" >
 								</form>
 							  </div>
 							</div>
@@ -136,9 +138,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<span class="icon-bar"></span>
 		</button>
 	</div>
+
 	<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 		<div class="navbar-header">
-
 
 				<a class="navbar-brand" href="#">سامانه توصیه‌گر فیلم
 								<i class="fa fa-film" aria-hidden="true"></i>
@@ -146,10 +148,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 		</div>
 		<nav>
-			<ul class="nav navbar-nav">
-				<li class="pull-right" style="font-size:15px;"><a href="#" top  data-toggle="modal" data-target="#myModal">ورودبه ‌حساب کاربری
-					<i class="fa fa-sign-in" aria-hidden="true"></i>
-				</a></li>
+			<ul class="nav navbar-nav" ng-if="user_data.navbar">
+				<li class="pull-right"  ng-if="!user_data.session" style="font-size:15px;" ng-cloak>
+					<a href="#" top  data-toggle="modal" data-target="#myModal">ورودبه ‌حساب کاربری
+						<i class="fa fa-sign-in"  aria-hidden="true"></i>
+					</a>
+				</li>
+				<li class="pull-right "  ng-if="user_data.session" ng-cloak>
+					<a href="#"  ng-bind="user_data.name">
+					</a>
+				</li>
+				<li class="pull-right "  ng-if="user_data.session" ng-cloak>
+					<a  href="#!" ng-click='logout()'>خروج
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -178,7 +190,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</script>
 <!-- //banner -->
 <!-- banner-bottom -->
-	<div class="banner-bottom" ng-controller="main_controller">
+	<div class="banner-bottom" >
+		<br>
+		<h4 class="latest-text w3_latest_text">فیلم های توصیه شده</h4>
 		<div class="container">
 			<div class="w3_agile_banner_bottom_grid">
 				<div id="owl-demo" class="owl-carousel owl-theme">
@@ -454,7 +468,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 						<div class="w3_agile_featured_movies">
 							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m15.jpg" title="album-name" class="img-responsive" alt=" " />
+								<a href="single.html" class="hvr-shutter-out-horizontal">
+									<img src="../images/m15.jpg" title="album-name" class="img-responsive" alt=" " />
 									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
 								</a>
 								<div class="mid-1 agileits_w3layouts_mid_1_home">
@@ -1779,10 +1794,10 @@ $(document).ready(function(){
 
 			});
 	</script>
-	<script src="../js/angular.min.js"></script>
-	<script src="../js/angular-route.min.js"></script>
-
+	<script src="../bower/angular/angular.min.js"></script>
+	<script src="../bower/angular-route/angular-route.min.js"></script>
+	<script src="../bower/toastr/toastr.min.js"></script>
 	<script src="../js/Angular/root.js"></script>
-<!-- //here ends scrolling icon -->
+	<script src="../js/Angular/http_engine.js"></script>
 </body>
 </html>

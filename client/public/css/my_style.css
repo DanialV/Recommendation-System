@@ -54,7 +54,13 @@ body{
 h2,h3,h1,h5,h4{
     font-family: IRANSans, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif!important;;
 }
-
+.toast-message{
+  font-size: 12px;
+  text-align: right;
+}
+.toast-title{
+  text-align: right;
+}
 
 
 /***

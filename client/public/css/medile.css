@@ -5,13 +5,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 html, body{
-    font-size: 100%;
 	background:#ffffff;
 	margin: 0;
 }
 p,ul li,ol li{
 	margin:0;
-	font-size:14px;
 }
 h1,h2,h3,h4,h5,h6{
 	margin:0;
@@ -246,9 +244,9 @@ i.glyphicon.glyphicon-play-circle {
     color: #fff;
     font-size: 3em;
 }
-.w3l-movie-gride-agile img:hover {
+/*.w3l-movie-gride-agile img:hover {
     opacity: 0.5;
-}
+}*/
 .ribben {
   position: absolute;
     top: 3%;

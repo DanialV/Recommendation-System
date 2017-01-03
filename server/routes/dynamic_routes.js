@@ -1,19 +1,24 @@
 /**
  * Created by danial on 7/28/16.
  */
- //TODO: add Logs post route and user edit profile
+//TODO: add Logs post route and user edit profile
 var _route = require("djs");
 var get_routes = [
-
+    '/init',
+    '/logout'
 ];
 var post_route = [
-
+    '/login',
+    '/enroll'
 ];
-module.exports = function(app){
-    get_routes.forEach(function(index){
-        _route.file_get(app,index);
+module.exports = function(app) {
+    app.get('/', function(req, res) {
+        res.render('index');
     });
-    post_route.forEach(function(index){
-        _route.file_post(app,index);
+    get_routes.forEach(function(index) {
+        _route.file_get(app, index);
+    });
+    post_route.forEach(function(index) {
+        _route.file_post(app, index);
     });
 };
