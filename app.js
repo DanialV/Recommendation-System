@@ -9,7 +9,8 @@ var index = require('./server/routes/index');
 var users = require('./server/routes/users');
 
 var app = express();
-
+global.init = {};
+global.init.db_name = "movies";
 // view engine setup
 app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'ejs');
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'client/public')));
 
 app.use('/', index);
 app.use('/users', users);
-
+require('./server/routes/root')(app);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
