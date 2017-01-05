@@ -45,7 +45,6 @@ module.exports.post = function(req, res) {
             console.mongo('Error', err);
             return res.sendStatus(500);
         }
-        console.log(result);
         res.send(result);
     });
 };

@@ -68,6 +68,6 @@ app.controller('main_controller', function($scope, http) {
             } else {
                 $scope.user_data.session = false;
             }
-        })
+        });
     }
 });;

@@ -18,14 +18,16 @@ fs.readFile('ratings.dat', 'utf8', function(err, data) {
     user_rating.shift();
     let each_data = {};
     let counter = 0;
+    let template = {}
     user_rating.forEach(function(index) {
         let temp = index.split(',');
         if (each_data.user_id == temp[0]) {
             each_data.user_id = temp[0];
             each_data.movie_rate.push({
                 'movie_id': temp[1],
-                'rate': temp[2]
-            });
+                'rate': Number(temp[2])
+            })
+
         } else {
             if (typeof each_data.user_id != 'undefined') {
                 let db_save = new db.rates(each_data);
@@ -37,7 +39,6 @@ fs.readFile('ratings.dat', 'utf8', function(err, data) {
                     if (counter == number_of_rates) {
                         database.close();
                     }
-
                 });
             }
             each_data = {};
@@ -45,8 +46,8 @@ fs.readFile('ratings.dat', 'utf8', function(err, data) {
             each_data.movie_rate = [];
             each_data.movie_rate.push({
                 'movie_id': temp[1],
-                'rate': temp[2]
-            });
+                'rate': Number(temp[2])
+            })
         }
     });
 });
