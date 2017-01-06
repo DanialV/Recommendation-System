@@ -44,7 +44,7 @@ db.getCollection('rates').aggregate([{
             weight_rate: -1
         }
     }, {
-        $out: "Top_rated_movie"
+        $out: "top_rated_movie"
     }
 
 ]);

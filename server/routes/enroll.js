@@ -6,6 +6,16 @@ var async = require("async");
 var bcrypt = require("bcrypt");
 var error = require('djs');
 var form = require('form_validation');
+var mongoose = require('mongoose');
+
+function CleanArray(arr) {
+    let clean_arr = [];
+    arr.forEach(function(index) {
+        let each_obj = index;
+        clean_arr.push(index._id);
+    });
+    return clean_arr;
+}
 module.exports.post = function(req, res) {
     let data = req.body;
     let isFormValid = (form.isValid(data.username) &&
@@ -23,10 +33,16 @@ module.exports.post = function(req, res) {
     async.waterfall([
         check_username,
         check_email,
-        save_result
+        generate_hashPassword,
+        save_result,
+        query_top_rated,
+        save_rated_query
+
     ], function(err, result) {
         if (err) {
-            return error.error_handel(res, err, 500, 'internal server error');
+            if (!err.externalError)
+                return error.error_handel(res, err, 500, 'internal server error');
+            return res.json(err);
         }
         res.json(result);
     });
@@ -37,13 +53,15 @@ module.exports.post = function(req, res) {
         }).lean().exec(function(err, username) {
             if (err) {
                 console.mongo(err);
+                err.externalError = false;
                 return (callback(err, null));
             }
             let res_data = {};
             if (username) {
                 res_data.status = false;
+                res_data.externalError = true;
                 res_data.message = 'نام کاربری قبلا در سیستم ثبت شده است';
-                return (callback(null, res_data));
+                return (callback(res_data, null));
             }
             res_data.status = true;
             return (callback(null, res_data));
@@ -51,46 +69,107 @@ module.exports.post = function(req, res) {
     }
 
     function check_email(res_data, callback) {
-        if (res_data.status) {
-            db.users.count({
-                email: data.email
-            }).lean().exec(function(err, email) {
-                if (err) {
-                    console.mongo(err);
-                    return (callback(err, null));
-                }
-                let res_data = {};
-                if (email) {
-                    res_data.status = false;
-                    res_data.message = 'ایمیل قبلا در سیستم ثبت شده است';
-                    return (callback(null, res_data));
-                }
-                res_data.status = true;
-                return (callback(null, res_data));
-            });
-        } else callback(null, res_data);
+        db.users.count({
+            email: data.email
+        }).lean().exec(function(err, email) {
+            if (err) {
+                console.mongo(err);
+                err.externalError = false;
+                return (callback(err, null));
+            }
+            let res_data = {};
+            if (email) {
+                res_data.status = false;
+                res_data.externalError = true;
+                res_data.message = 'ایمیل قبلا در سیستم ثبت شده است';
+                return (callback(res_data, null));
+            }
+            res_data.status = true;
+            return (callback(null, res_data));
+        });
     }
 
-    function save_result(res_data, callback) {
-        if (res_data.status) {
-            bcrypt.hash(data.password, 10, function(err, hash) {
-                if (err) {
-                    console.log(err);
-                    return (callback(err, null));
-                }
-                data.password = hash;
-                var saveModule = new db.users(data);
-                saveModule.save(function(err) {
-                    let res_data = {
-                        'status': true
-                    };
-                    if (err) {
-                        console.mongo(err);
-                        return (callback(err, null));
-                    }
-                    return (callback(null, res_data));
-                });
-            });
-        } else callback(null, res_data);
+    function generate_hashPassword(res_data, callback) {
+        bcrypt.hash(data.password, 10, function(err, hash) {
+            if (err) {
+                console.mongo('Error', err);
+                err.externalError = false;
+                return (callback(err, null));
+            }
+            let res_data = {
+                'status': true,
+                'password': hash
+            }
+            callback(null, res_data);
+        });
     }
-};
+
+    function save_result(res_data, cb) {
+        data.password = res_data.password;
+        let temp = new db.users(data);
+        temp.save(function(err) {
+            if (err) {
+                console.mongo('Error', err);
+                err.externalError = false;
+                return (cb(err, null));
+            }
+            return (cb(null, res_data));
+
+        });
+    }
+
+    function query_top_rated(res_data, cb) {
+        db.top_rated_movie.find({}, {
+            _id: true
+        }).sort({
+            'weight_rate': -1
+        }).limit(12).lean().exec(function(err, topRated) {
+            if (err) {
+                console.mongo('Error', err);
+                err.externalError = false;
+                return (cb(err, null));
+            }
+            if (topRated != null) {
+                res_data.topRated = CleanArray(topRated);
+                return (cb(null, res_data));
+            }
+            console.mongo("Error", "unhandeled error in enroll.js line 116");
+            res_data = {
+                'status': false,
+                'externalError': false
+            }
+            return (cb(res_data, null));
+        });
+    }
+
+    function save_rated_query(res_data, cb) {
+        db.users.findOne({
+            username: data.username
+        }, {
+            _id: true
+        }).lean().exec(function(err, userId) {
+            if (err) {
+                console.mongo('Error', err);
+                err.externalError = false;
+                return (cb(err, null));
+            }
+            let rated_data = {
+                'user_id': userId._id.toString(),
+                'movie_rate': [],
+                'recom_movie': res_data.topRated
+            }
+            let temp = new db.rates(rated_data);
+            temp.save(function(err) {
+                if (err) {
+                    console.mongo('Error', err);
+                    err.externalError = false;
+                    return (cb(err, null));
+                }
+                res_data = {
+                    'status': true
+                }
+                return (cb(null, res_data));
+            });
+        });
+    }
+}

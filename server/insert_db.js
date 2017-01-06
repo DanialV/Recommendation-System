@@ -12,6 +12,11 @@ database.once('open', function() {
     console.log("connected to mongodb");
 });
 var db = require('mongo_schemas');
+db.top_rated_movie.find().lean().exec(function(err, info) {
+    if (err) {
+        console.log(err);
+    } else console.log(info);
+});
 let number_of_rates = 6040;
 fs.readFile('ratings.dat', 'utf8', function(err, data) {
     let user_rating = data.split('\n');
