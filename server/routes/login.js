@@ -45,6 +45,7 @@ module.exports.post = function(req, res) {
                     if (hash_res) {
                         console.mongo('Info', 'Successfull login Username : ' + user_data.username);
                         req.session._id = user_data._id;
+                        console.log(user_data);
                         res_data.name = user_data.first_name + " " + user_data.last_name;
                         res_data._id = user_data._id.toString();
                         res_data.status = true;
@@ -57,12 +58,13 @@ module.exports.post = function(req, res) {
             });
         },
         function find_recommended_movie(res_data, cb) {
-            recommended.get_recommended(res_data._id, function(err, recom_movie) {
+            recommended.get_recommended(res_data._id, function(err, movies) {
                 if (err) {
                     return (cb(err, null));
                 }
-                console.log(recom_movie);
-                return (cb(null, recom_movie))
+                //recom_movie.name = res_data.name;
+                res_data.recom_movie = movies.recom_movie;
+                return (cb(null, res_data))
             });
         }
     ], function(err, result) {
@@ -73,7 +75,6 @@ module.exports.post = function(req, res) {
             console.mongo('Error', err);
             return res.sendStatus(500);
         }
-        console.log(result);
         res.json(result);
     });
 };

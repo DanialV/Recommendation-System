@@ -1,3 +1,10 @@
+body > .inner {
+  display: none;
+}
+
+body.pg-loaded > .inner {
+  display: block;
+}
 @font-face {
     font-family: IRANSans;
     font-style: normal;

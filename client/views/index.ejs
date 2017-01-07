@@ -1,21 +1,80 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
+
 <title>One Movies an Entertainment Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="One Movies Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<meta name="keywords" content="" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
 <link href="../bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../bower/toastr/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="../bower/bootstrap-star-rating/css/star-rating.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/my_style.css" rel='stylesheet' type='text/css' />
-
+<link href="../bower/please-wait/build/please-wait.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../bower/SpinKit/css/spinkit.css" rel="stylesheet" type="text/css" media="all" />
 <!-- <link href="css/bootstrap_rtl.css" rel="stylesheet" type="text/css" media="all" /> -->
+<style type="text/css">
+	/*
+*  Usage:
+*
+		<div class="sk-wave">
+			<div class="sk-rect sk-rect1"></div>
+			<div class="sk-rect sk-rect2"></div>
+			<div class="sk-rect sk-rect3"></div>
+			<div class="sk-rect sk-rect4"></div>
+			<div class="sk-rect sk-rect5"></div>
+		</div>
+*
+*/
+.sk-wave {
+margin: 40px auto;
+width: 50px;
+height: 40px;
+text-align: center;
+font-size: 10px; }
+.sk-wave .sk-rect {
+	background-color: #333;
+	height: 100%;
+	width: 6px;
+	display: inline-block;
+	-webkit-animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
+					animation: sk-waveStretchDelay 1.2s infinite ease-in-out; }
+.sk-wave .sk-rect1 {
+	-webkit-animation-delay: -1.2s;
+					animation-delay: -1.2s; }
+.sk-wave .sk-rect2 {
+	-webkit-animation-delay: -1.1s;
+					animation-delay: -1.1s; }
+.sk-wave .sk-rect3 {
+	-webkit-animation-delay: -1s;
+					animation-delay: -1s; }
+.sk-wave .sk-rect4 {
+	-webkit-animation-delay: -0.9s;
+					animation-delay: -0.9s; }
+.sk-wave .sk-rect5 {
+	-webkit-animation-delay: -0.8s;
+					animation-delay: -0.8s; }
+
+@-webkit-keyframes sk-waveStretchDelay {
+0%, 40%, 100% {
+	-webkit-transform: scaleY(0.4);
+					transform: scaleY(0.4); }
+20% {
+	-webkit-transform: scaleY(1);
+					transform: scaleY(1); } }
+
+@keyframes sk-waveStretchDelay {
+0%, 40%, 100% {
+	-webkit-transform: scaleY(0.4);
+					transform: scaleY(0.4); }
+20% {
+	-webkit-transform: scaleY(1);
+					transform: scaleY(1); } }
+
+</style>
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="../css/contactstyle.css" type="text/css" media="all" />
 <link rel="stylesheet" href="../css/faqstyle.css" type="text/css" media="all" />
@@ -31,6 +90,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="../bower/font-awesome/css/font-awesome.min.css" />
 <!-- //font-awesome icons -->
 <!-- js -->
+<script type="text/javascript" src="../bower/please-wait/build/please-wait.min.js"></script>
+
 <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
 <!-- banner-bottom-plugin -->
@@ -59,8 +120,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- start-smoth-scrolling -->
 </head>
 
-<body ng-controller="main_controller" ng-cloak>
+<body ng-controller="main_controller" class="inner">
 <!-- header -->
+<script>
+window.loading_screen = window.pleaseWait({
+	logo:'../images/spinner3.png',
+	backgroundColor:' #ff8533',
+	loadingHtml: "<p class='loading-message' style='font-size:20px; padding-bottom:100px;'>...در حال بارگذاری </p><i class='fa fa-cog fa-spin fa-5x fa-fw'></i>"
+});
+</script>
 
 <!-- //header -->
 <!-- bootstrap-pop-up -->
@@ -143,16 +211,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<nav>
 			<ul class="nav navbar-nav" ng-if="user_data.navbar">
-				<li class="pull-right"  ng-if="!user_data.session" style="font-size:15px;" ng-cloak>
+				<li class="pull-right"  ng-if="!user_data.session" style="font-size:15px;">
 					<a href="#" top  data-toggle="modal" data-target="#myModal">ورودبه ‌حساب کاربری
 						<i class="fa fa-sign-in"  aria-hidden="true"></i>
 					</a>
 				</li>
-				<li class="pull-right "  ng-if="user_data.session" ng-cloak>
+				<li class="pull-right "  ng-if="user_data.session">
 					<a href="#"  ng-bind="user_data.name">
 					</a>
 				</li>
-				<li class="pull-right "  ng-if="user_data.session" ng-cloak>
+				<li class="pull-right "  ng-if="user_data.session">
 					<a  href="#!" ng-click='logout()'>خروج
 					</a>
 				</li>
@@ -162,7 +230,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </nav>
 	<div  id="slidey" style="display:none;border:10">
 		<ul>
-			<li><img src="../images/5.jpg" alt=" "><p class='title'>Tarzan</p><p class='description'> Tarzan, having acclimated to life in London, is called back to his former home in the jungle to investigate the activities at a mining encampment.</p></li>
+			<!-- <li ng-repeat = "index in user_data.recom_movie">
+				<img ng-src="../{{index.poster_address}}" alt=" ">
+				<p class='title'>{{index.Title}}</p>
+				<p class='description'>{{index.Plot}}</p>
+			</li> -->
+			<li><img src="../images/5.jpg" alt=" ">
+				<p class='title'>Tarzan</p>
+				<p class='description'> Tarzan, having acclimated to life in London, is called back to his former home in the jungle to investigate the activities at a mining encampment.
+				</p>
+			</li>
 			<li><img src="../images/2.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
 			<li><img src="../images/3.jpg" alt=" "><p class='title'>Independence</p><p class='description'>The fate of humanity hangs in the balance as the U.S. President and citizens decide if these aliens are to be trusted ...or feared.</p></li>
 			<li><img src="../images/4.jpg" alt=" "><p class='title'>Central Intelligence</p><p class='description'>Bullied as a teen for being overweight, Bob Stone (Dwayne Johnson) shows up to his high school reunion looking fit and muscular. Claiming to be on a top-secret ...</p></li>
@@ -190,12 +267,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<div class="container">
 			<div class="w3_agile_banner_bottom_grid">
-			<data-owl-carousel class="owl-carousel" data-options="{autoPlay: 3000,itemsDesktop : [640,4],itemsDesktopSmall : [414,3],touchDrag: false,mouseDrag:false}">
+			<data-owl-carousel class="owl-carousel">
 				 <div owl-carousel-item="" ng-repeat="index in user_data.recom_movie" class="item">
 					 <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-						 <a href="single.html" class="hvr-shutter-out-horizontal">
-							 <img ng-src="../{{index.poster_address}}" title="album-name" class="img-responsive" alt=" " />
-						 </a>
+						<img ng-src="../{{index.poster_address}}" title="album-name" class="img-responsive" alt=" " />
 						 <div class="mid-1 agileits_w3layouts_mid_1_home">
 							 <div class="w3l-movie-text">
 								 <h6>{{index.Title}}</h6>
@@ -203,7 +278,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							 <div class="mid-2 agile_mid_2_home">
 								 <p>{{index.Year}}</p>
 								 <div class="block-stars">
- 								 		<div star-rating rating="starRating1" read-only="false" max-rating="5" click="click1(param)" mouse-hover="mouseHover1(param)" mouse-leave="mouseLeave1(param)"></div>
+ 								 		<div star-rating rating="starRating1" read-only="false" max-rating="5" click="rateMovie(index.movie_id,param)"></div>
 								 </div>
 								 <div class="clearfix">
 							 </div>
@@ -232,17 +307,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id="myTabContent" class="tab-content">
 					<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 						<div class="w3_agile_featured_movies">
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal">
-									<img src="../images/m15.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
+							<div class="col-md-2 w3l-movie-gride-agile" ng-repeat="index in user_data.recom_movie2">
+								<img ng-src="../{{index.poster_address}}" title="album-name" class="img-responsive" alt=" " />
+								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
 								<div class="mid-1 agileits_w3layouts_mid_1_home">
 									<div class="w3l-movie-text">
-										<h6><a href="single.html">God’s Compass</a></h6>
+										<h6>{{index.Title}}</h6>
 									</div>
 									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
+										<p>{{index.Year}}</p>
 										<div class="block-stars">
 											<ul class="w3l-ratings">
 												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -259,296 +332,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<p>NEW</p>
 								</div>
 							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal">
-									<img src="../images/m2.jpg" title="album-name" class="img-responsive" alt=" "  />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">Bad Moms</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix">
-
-										</div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m5.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">Jason Bourne</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m16.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">Rezort</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m17.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">Peter</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m18.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">ISRA 88</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m1.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">War Dogs</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m14.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">The Other Side</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m19.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">Civil War</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m20.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">The Secret Life of Pets</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m21.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">The Jungle Book</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m22.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-										<h6><a href="single.html">Assassin's Creed 3</a></h6>
-									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
@@ -568,58 +351,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
 											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
 											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m2.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">Bad Moms</a></h6>
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m9.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">Central Intelligence</a></h6>
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
 											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
 										</ul>
 									</div>
@@ -1525,6 +1256,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"> </div>
 		</div>
 	</div>
+
 <!-- //footer -->
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
@@ -1559,14 +1291,18 @@ $(document).ready(function(){
 
 			});
 	</script>
+
 	<script src="../bower/angular/angular.min.js"></script>
 	<script src="../bower/angular-route/angular-route.min.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script> -->
 	<script src="../bower/owl-carousel/owl-carousel/owl.carousel.min.js"></script>
-	<script src="../js/Angular/star_rating.js"></script>
-
 	<script src="../bower/toastr/toastr.min.js"></script>
 	<script src="../js/Angular/root.js"></script>
+	<script src="../js/Angular/star_rating.js"></script>
+	<script src="../js/Angular/owl.js"></script>
 	<script src="../js/Angular/http_engine.js"></script>
+	<script>
+		window.loading_screen.finish();
+	</script>
 </body>
 </html>
