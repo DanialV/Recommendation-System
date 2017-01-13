@@ -34,6 +34,7 @@ app.controller('main_controller', function($scope, http) {
                 itemsDesktopSmall: [414, 3]
             });
             owl.data('owlCarousel').destroy();
+
             $scope.user_data.recom_movie = data.recom_movie;
             $scope.user_data.recom_movie2 = [data.recom_movie[6], data.recom_movie[1],
                 data.recom_movie[2], data.recom_movie[3], data.recom_movie[4], data.recom_movie[5]
@@ -51,16 +52,6 @@ app.controller('main_controller', function($scope, http) {
             if (data.status == true) {
                 $('#myModal').modal('toggle');
                 toastr.success('با موفقیت وارد شدید.', 'خوش آمدید.');
-                $scope.user_data.session = true;
-                $scope.user_data.name = data.name;
-                let owl = $(".owl-carousel");
-                owl.owlCarousel({
-                    autoPlay: 3000,
-                    itemsDesktop: [640, 4],
-                    itemsDesktopSmall: [414, 3]
-                });
-                owl.data('owlCarousel').destroy();
-                $scope.user_data.recom_movie = data.recom_movie;
             } else {
                 toastr.error('نام کاربری یا رمز عبور اشتباه است', 'خطا');
             }
@@ -74,8 +65,7 @@ app.controller('main_controller', function($scope, http) {
                 return toastr.error('اشکال داخلی سرور', 'خطا');
             }
             if (data.status == true) {
-                toastr.success('با موفقیت ثبت نام شدید');
-                $('#myModal').modal('toggle');
+                toastr.success(data.message);
 
             } else {
                 toastr.error(data.message, 'خطا');

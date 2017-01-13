@@ -44,6 +44,8 @@ module.exports.post = function(req, res) {
                 return error.error_handel(res, err, 500, 'internal server error');
             return res.json(err);
         }
+        result.title = '';
+        result.message = 'با موفقیت ثبت‌نام شدید.';
         res.json(result);
     });
 

@@ -9,6 +9,8 @@ module.exports = function(app) {
         req.user = {};
         if (typeof req.session._id == 'undefined') {
             req.user.session = null;
+            if (req.url != "/login" && req.url != '/enroll')
+                return res.redirect('/login');
             next();
         } else {
             db.users.findOne({

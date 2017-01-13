@@ -72,7 +72,7 @@
 
             // create controls
             var controls = "<div class='slidey-controls slidey-controls-previous'><i class='fa fa-chevron-left'></i></div>";
-               controls += "<div class='slidey-controls slidey-controls-next'><i class='fa fa-chevron-right'></i></div>";
+            controls += "<div class='slidey-controls slidey-controls-next'><i class='fa fa-chevron-right'></i></div>";
 
             base.layout.$image.append(controls);
 
@@ -101,12 +101,12 @@
             // calculate list item heights
             var sliderHeight = base.layout.$image.innerHeight();
             var oneSlideListItemHeight = parseInt(sliderHeight) / base.options.listCount;
-            
+
             // set list item thumbnail dimensions
             var thumbWidth = oneSlideListItemHeight - 9;
             base.layout.$list.find(".slidey-list-thumbnail").css("width", thumbWidth).css("height", thumbWidth);
             base.addEventListeners();
-            
+
             // set list item heights
             base.layout.$list.find("li").each(function() {
                 var $this = $(this);
@@ -125,11 +125,11 @@
             base.layout.$list.on("click", "li", function() {
                 base.gotoSlide(base.layout.$list.find("li").index($(this)));
             });
-            base.layout.$image.on("click", ".slidey-controls-previous", function(){
+            base.layout.$image.on("click", ".slidey-controls-previous", function() {
                 base.stopTimer();
                 base.slidePrevious();
             });
-            base.layout.$image.on("click", ".slidey-controls-next", function(){
+            base.layout.$image.on("click", ".slidey-controls-next", function() {
                 base.stopTimer();
                 base.slideNext();
             });
@@ -184,32 +184,26 @@
                 base.startTimer();
             });
         };
-        base.prepareNodes = function(){
-            if(base.options.showNodes)
-            {
-                if(base.options.nodeContainer !== "" && $(base.options.nodeContainer).size() > 0)
-                {
+        base.prepareNodes = function() {
+            if (base.options.showNodes) {
+                if (base.options.nodeContainer !== "" && $(base.options.nodeContainer).size() > 0) {
                     base.layout.$nodeContainer = $(base.options.nodeContainer);
                     var $nodebase = $("<div class='slidey-node-container'></ul>");
-                    for (var slideIndex = 0; slideIndex < base.slides.length; slideIndex++) 
-                    {
+                    for (var slideIndex = 0; slideIndex < base.slides.length; slideIndex++) {
                         var node = "<div class='slidey-node' style='background-image: url(\"" + base.slides[slideIndex].image + "\");'></div>";
                         $nodebase.append(node);
                     }
                     base.layout.$nodeContainer.empty().append($nodebase);
 
-                    $(".slidey-node",base.layout.$nodeContainer).on("click", function(){
+                    $(".slidey-node", base.layout.$nodeContainer).on("click", function() {
                         base.gotoSlide(base.layout.$nodeContainer.find(".slidey-node").index($(this)));
                     });
                 }
             }
         };
-        base.selectNode = function(nodeIndex)
-        {
-            if(base.options.showNodes)
-            {
-                if(base.options.nodeContainer !== "" && $(base.options.nodeContainer).size() > 0)
-                {
+        base.selectNode = function(nodeIndex) {
+            if (base.options.showNodes) {
+                if (base.options.nodeContainer !== "" && $(base.options.nodeContainer).size() > 0) {
                     var $nodes = base.layout.$nodeContainer.find(".slidey-node");
                     $nodes.removeClass("active");
                     $nodes.eq(nodeIndex).addClass("active");
@@ -226,7 +220,7 @@
         showNodes: false,
         nodeContainer: ""
     };
-    
+
     $.fn.slidey = function(options) {
         return this.each(function() {
             (new $.slidey(this, options));

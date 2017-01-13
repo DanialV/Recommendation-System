@@ -7,76 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
 <link href="../bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../bower/toastr/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/my_style.css" rel='stylesheet' type='text/css' />
+<link href="../css/login.css" rel='stylesheet' type='text/css' />
 <link href="../bower/please-wait/build/please-wait.css" rel="stylesheet" type="text/css" media="all" />
-<link href="../bower/SpinKit/css/spinkit.css" rel="stylesheet" type="text/css" media="all" />
-<!-- <link href="css/bootstrap_rtl.css" rel="stylesheet" type="text/css" media="all" /> -->
-<style type="text/css">
-	/*
-*  Usage:
-*
-		<div class="sk-wave">
-			<div class="sk-rect sk-rect1"></div>
-			<div class="sk-rect sk-rect2"></div>
-			<div class="sk-rect sk-rect3"></div>
-			<div class="sk-rect sk-rect4"></div>
-			<div class="sk-rect sk-rect5"></div>
-		</div>
-*
-*/
-.sk-wave {
-margin: 40px auto;
-width: 50px;
-height: 40px;
-text-align: center;
-font-size: 10px; }
-.sk-wave .sk-rect {
-	background-color: #333;
-	height: 100%;
-	width: 6px;
-	display: inline-block;
-	-webkit-animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
-					animation: sk-waveStretchDelay 1.2s infinite ease-in-out; }
-.sk-wave .sk-rect1 {
-	-webkit-animation-delay: -1.2s;
-					animation-delay: -1.2s; }
-.sk-wave .sk-rect2 {
-	-webkit-animation-delay: -1.1s;
-					animation-delay: -1.1s; }
-.sk-wave .sk-rect3 {
-	-webkit-animation-delay: -1s;
-					animation-delay: -1s; }
-.sk-wave .sk-rect4 {
-	-webkit-animation-delay: -0.9s;
-					animation-delay: -0.9s; }
-.sk-wave .sk-rect5 {
-	-webkit-animation-delay: -0.8s;
-					animation-delay: -0.8s; }
-
-@-webkit-keyframes sk-waveStretchDelay {
-0%, 40%, 100% {
-	-webkit-transform: scaleY(0.4);
-					transform: scaleY(0.4); }
-20% {
-	-webkit-transform: scaleY(1);
-					transform: scaleY(1); } }
-
-@keyframes sk-waveStretchDelay {
-0%, 40%, 100% {
-	-webkit-transform: scaleY(0.4);
-					transform: scaleY(0.4); }
-20% {
-	-webkit-transform: scaleY(1);
-					transform: scaleY(1); } }
-
-</style>
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="../css/contactstyle.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="../css/contactstyle.css" type="text/css" media="all" />
 <link rel="stylesheet" href="../css/faqstyle.css" type="text/css" media="all" />
 <link href="../css/single.css" rel='stylesheet' type='text/css' />
 <link href="../css/medile.css" rel='stylesheet' type='text/css' />
@@ -93,6 +31,8 @@ font-size: 10px; }
 <script type="text/javascript" src="../bower/please-wait/build/please-wait.min.js"></script>
 
 <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/jquery.particleground.min.js"></script>
+
 <!-- //js -->
 <!-- banner-bottom-plugin -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css" />
@@ -110,6 +50,7 @@ font-size: 10px; }
 <script type="text/javascript" src="../js/move-top.js"></script>
 <script type="text/javascript" src="../js/easing.js"></script>
 <script type="text/javascript">
+
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){
 			event.preventDefault();
@@ -120,7 +61,9 @@ font-size: 10px; }
 <!-- start-smoth-scrolling -->
 </head>
 
-<body ng-controller="main_controller" class="inner">
+<body ng-controller="main_controller" class="inner" >
+	<div id="particles"></div>
+
 <!-- header -->
 <script>
 window.loading_screen = window.pleaseWait({
@@ -129,142 +72,58 @@ window.loading_screen = window.pleaseWait({
 	loadingHtml: "<p class='loading-message' style='font-size:20px; padding-bottom:100px;'>...در حال بارگذاری </p><i class='fa fa-cog fa-spin fa-5x fa-fw'></i>"
 });
 </script>
-
-<!-- //header -->
-<!-- bootstrap-pop-up -->
-	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					ثبت نام
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="w3_login_module">
-							<div class="module form-module">
-							  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-								<div class="tooltip">ثبت نام / ورود</div>
-							  </div>
-							  <div class="form">
-								<h3 class="pull-right">به حساب کاربری خود وارد شوید</h3>
-								<form method="post" ng-submit="send_login()">
-								  <input dir="rtl" ng-model="login_data.username" type="text" name="Username" placeholder="نام کاربری" required="">
-								  <input dir="rtl" ng-model="login_data.password" type="password" name="Password" placeholder="کلمه عبور" required="">
-								  <input type="submit"  value="ورود" >
-								</form>
-							  </div>
-							  <div class="form">
-								<h3 class="pull-right">ایجاد حساب جدید</h3>
-								<form  method="post" ng-submit="send_enroll()">
-									<input dir="rtl" ng-model="enroll_data.first_name" type="text" placeholder="نام" required	>
-									<input dir="rtl" ng-model="enroll_data.last_name" type="text"  placeholder="نام خانوادگی" required>
-								  <input dir="rtl" ng-model="enroll_data.username" type="text"  placeholder="نام کاربری" required>
-								  <input dir="rtl" ng-model="enroll_data.password" type="password"  placeholder="رمز عبور" required>
-								  <input dir="rtl" ng-model="enroll_data.email" type="email"  placeholder="ادرس ایمیل" required>
-								  <input type="submit" value="ثبت نام" >
-								</form>
-							  </div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<script>
-		$('.toggle').click(function(){
-		  // Switches the Icon
-		  $(this).children('i').toggleClass('fa-pencil');
-		  // Switches the forms
-		  $('.form').animate({
-			height: "toggle",
-			'padding-top': 'toggle',
-			'padding-bottom': 'toggle',
-			opacity: "toggle"
-		  }, "slow");
-		});
-	</script>
-<!-- //bootstrap-pop-up -->
-<!-- nav -->
-
-
-<!-- //nav -->
-<!-- banner -->
-<nav class="navbar navbar-default ">
-	<div class="navbar-header navbar-left">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-	</div>
-
-	<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-		<div class="navbar-header">
-
-				<a class="navbar-brand" href="#">سامانه توصیه‌گر فیلم
-								<i class="fa fa-film" aria-hidden="true"></i>
-
-				</a>
-		</div>
-		<nav>
-			<ul class="nav navbar-nav" ng-if="user_data.navbar">
-				<li class="pull-right"  ng-if="!user_data.session" style="font-size:15px;">
-					<a href="#" top  data-toggle="modal" data-target="#myModal">ورودبه ‌حساب کاربری
-						<i class="fa fa-sign-in"  aria-hidden="true"></i>
-					</a>
-				</li>
-				<li class="pull-right "  ng-if="user_data.session">
-					<a href="#"  ng-bind="user_data.name">
-					</a>
-				</li>
-				<li class="pull-right "  ng-if="user_data.session">
-					<a  href="#!" ng-click='logout()'>خروج
-					</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</nav>
-	<div  id="slidey" style="display:none;border:10">
+<header>
+	<div  id="slidey"   >
 		<ul>
-			<!-- <li ng-repeat = "index in user_data.recom_movie">
-				<img ng-src="../{{index.poster_address}}" alt=" ">
-				<p class='title'>{{index.Title}}</p>
-				<p class='description'>{{index.Plot}}</p>
-			</li> -->
-			<li><img src="../images/5.jpg" alt=" ">
+			<!-- <li><img src="../images/5.jpg" alt=" ">
 				<p class='title'>Tarzan</p>
 				<p class='description'> Tarzan, having acclimated to life in London, is called back to his former home in the jungle to investigate the activities at a mining encampment.
 				</p>
-			</li>
+			</li> -->
 			<li><img src="../images/2.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
 			<li><img src="../images/3.jpg" alt=" "><p class='title'>Independence</p><p class='description'>The fate of humanity hangs in the balance as the U.S. President and citizens decide if these aliens are to be trusted ...or feared.</p></li>
 			<li><img src="../images/4.jpg" alt=" "><p class='title'>Central Intelligence</p><p class='description'>Bullied as a teen for being overweight, Bob Stone (Dwayne Johnson) shows up to his high school reunion looking fit and muscular. Claiming to be on a top-secret ...</p></li>
 			<li><img src="../images/6.jpg" alt=" "><p class='title'>Ice Age</p><p class='description'>In the film's epilogue, Scrat keeps struggling to control the alien ship until it crashes on Mars, destroying all life on the planet.</p></li>
 			<li><img src="../images/7.jpg" alt=" "><p class='title'>X - Man</p><p class='description'>In 1977, paranormal investigators Ed (Patrick Wilson) and Lorraine Warren come out of a self-imposed sabbatical to travel to Enfield, a borough in north ...</p></li>
 		</ul>
-  </div>
-
+	</div>
     <script src="../js/jquery.slidey.js"></script>
     <script src="../js/jquery.dotdotdot.min.js"></script>
+
 	   <script type="text/javascript">
 			$("#slidey").slidey({
-				interval: 8000,
-				listCount: 5,
-				autoplay: false,
-				showList: true
+				interval: 3000,
+				 listCount: 5,
+				 showList: true
 			});
 			$(".slidey-list-description").dotdotdot();
 		</script>
-<!-- //banner -->
-<!-- banner-bottom -->
+</header>
+<!-- Begin Navbar -->
+<div id="nav">
+<div class="navbar navbar-default navbar-static">
+<div class="container">
+	<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+	<a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="glyphicon glyphicon-bar"></span>
+		<span class="glyphicon glyphicon-bar"></span>
+		<span class="glyphicon glyphicon-bar"></span>
+		
+	</a>
+	 <a class="navbar-brand" href="#">سامانه توصیه‌گر فیلم	<i class="fa fa-film" aria-hidden="true"></i></a>
+
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+			<li class="divider"></li>
+
+		</ul>
+	</div>
+</div>
+</div><!-- /.navbar -->
+</div>
 	<div class="banner-bottom" >
 		<br>
 		<h4 class="latest-text w3_latest_text">فیلم های توصیه شده</h4>
-
 		<div class="container">
 			<div class="w3_agile_banner_bottom_grid">
 			<data-owl-carousel class="owl-carousel">
@@ -334,6 +193,7 @@ window.loading_screen = window.pleaseWait({
 							</div>
 						</div>
 					</div>
+
 					<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
 						<div class="col-md-2 w3l-movie-gride-agile pull-right">
 							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="../images/m22.jpg" title="album-name" class="img-responsive" alt=" " />
@@ -1257,10 +1117,12 @@ window.loading_screen = window.pleaseWait({
 		</div>
 	</div>
 
+
 <!-- //footer -->
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
 <script>
+
 $(document).ready(function(){
     $(".dropdown").hover(
         function() {
@@ -1274,29 +1136,34 @@ $(document).ready(function(){
     );
 });
 </script>
+
 <!-- //Bootstrap Core JavaScript -->
 <!-- here stars scrolling icon -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear'
-				};
-			*/
-
 			$().UItoTop({ easingType: 'easeOutQuart' });
 
 			});
 	</script>
+	<script>
+	$('#nav').affix({
+		offset: {
+			top: $('header').height()
+		}
+});
 
+$('#sidebar').affix({
+		offset: {
+			top: 200
+		}
+});
+	</script>
 	<script src="../bower/angular/angular.min.js"></script>
 	<script src="../bower/angular-route/angular-route.min.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script> -->
 	<script src="../bower/owl-carousel/owl-carousel/owl.carousel.min.js"></script>
 	<script src="../bower/toastr/toastr.min.js"></script>
+	<script src="../js/login.js"></script>
 	<script src="../js/Angular/root.js"></script>
 	<script src="../js/Angular/star_rating.js"></script>
 	<script src="../js/Angular/owl.js"></script>
@@ -1304,5 +1171,6 @@ $(document).ready(function(){
 	<script>
 		window.loading_screen.finish();
 	</script>
+
 </body>
 </html>

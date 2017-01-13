@@ -14,7 +14,8 @@ module.exports.post = function(req, res) {
             let isFormValid = (form.isValid(data.username) &&
                 form.isValid(data.password));
             let error = {
-                'status': false
+                'status': false,
+                'message': 'مقادیر وارد شده نامعبتر است.'
             }
             if (isFormValid) {
                 return (cb(null, true));
@@ -33,7 +34,8 @@ module.exports.post = function(req, res) {
                 if (user_data == null) {
                     console.mongo('Info', 'Unsuccessful login wrong Username : ' + data.username + ' password: ' + data.password);
                     return (callback({
-                        status: false
+                        'status': false,
+                        'message': 'نام‌کاربری‌ یا رمز‌عبور اشتباه است.'
                     }, null));
                 }
                 bcrypt.compare(data.password, user_data.password, function(err, hash_res) {
@@ -45,9 +47,6 @@ module.exports.post = function(req, res) {
                     if (hash_res) {
                         console.mongo('Info', 'Successfull login Username : ' + user_data.username);
                         req.session._id = user_data._id;
-                        console.log(user_data);
-                        res_data.name = user_data.first_name + " " + user_data.last_name;
-                        res_data._id = user_data._id.toString();
                         res_data.status = true;
                         return (callback(null, res_data));
                     }
@@ -55,16 +54,6 @@ module.exports.post = function(req, res) {
                     res_data.status = false;
                     return (callback(res_data, null));
                 });
-            });
-        },
-        function find_recommended_movie(res_data, cb) {
-            recommended.get_recommended(res_data._id, function(err, movies) {
-                if (err) {
-                    return (cb(err, null));
-                }
-                //recom_movie.name = res_data.name;
-                res_data.recom_movie = movies.recom_movie;
-                return (cb(null, res_data))
             });
         }
     ], function(err, result) {
@@ -75,6 +64,8 @@ module.exports.post = function(req, res) {
             console.mongo('Error', err);
             return res.sendStatus(500);
         }
+        result.title = 'خوش آمدید';
+        result.message = 'با موفقیت وارد شدید.';
         res.json(result);
     });
-};
+}

@@ -15,6 +15,9 @@ module.exports = function(app) {
     app.get('/', function(req, res) {
         res.render('index');
     });
+    app.get('/login', function(req, res) {
+        res.render('login');
+    });
     get_routes.forEach(function(index) {
         _route.file_get(app, index);
     });

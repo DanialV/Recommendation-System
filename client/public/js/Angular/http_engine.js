@@ -1,4 +1,4 @@
-angular.module('http_engine', ['ngRoute']).service('http', function($http) {
+angular.module('http_engine', []).service('http', function($http) {
     this.post = function(path, _data, cb) {
         $http({
             url: path,
