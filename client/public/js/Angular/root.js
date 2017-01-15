@@ -47,14 +47,23 @@ app.controller('main_controller', function($scope, http) {
         http.get('/logout', {}, function(err, data) {
             if (err) {
                 return toastr.error('اشکال داخلی سرور', 'خطا');
-            } else {
-                location.replace('/');
             }
+            location.replace('/');
         });
     }
 
-    $scope.starRating1 = 0;
     $scope.rateMovie = function(movie_id, param) {
-        alert(movie_id + " " + param);
+        var data = {};
+        data.rate = param;
+        data.movie_id = movie_id;
+        // http.post('/rate', data, function(err, data) {
+        //     if (err) {
+        //         return toastr.error('اشکال داخلی سرور', 'خطا');
+        //     }
+        //     if (data.status == true) {
+        //         toastr.success(data.message);
+        //     }
+        //
+        // });
     }
 });

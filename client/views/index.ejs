@@ -75,7 +75,7 @@ window.loading_screen = window.pleaseWait({
 <header>
 	<div  id="slidey"   >
 		<ul>
-			<li><img src="../images/2.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
+			<li><img src="../images/schindlers-list.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
 			<li><img src="../images/3.jpg" alt=" "><p class='title'>Independence</p><p class='description'>The fate of humanity hangs in the balance as the U.S. President and citizens decide if these aliens are to be trusted ...or feared.</p></li>
 			<li><img src="../images/4.jpg" alt=" "><p class='title'>Central Intelligence</p><p class='description'>Bullied as a teen for being overweight, Bob Stone (Dwayne Johnson) shows up to his high school reunion looking fit and muscular. Claiming to be on a top-secret ...</p></li>
 			<li><img src="../images/6.jpg" alt=" "><p class='title'>Ice Age</p><p class='description'>In the film's epilogue, Scrat keeps struggling to control the alien ship until it crashes on Mars, destroying all life on the planet.</p></li>
@@ -92,12 +92,12 @@ window.loading_screen = window.pleaseWait({
 				 showList: true
 			});
 			$(".slidey-list-description").dotdotdot();
+
 		</script>
 </header>
 <!-- Begin Navbar -->
 <div id="nav">
 <div class="navbar navbar-default navbar-static">
-
 
 	<a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="glyphicon glyphicon-bar"></span>
@@ -114,16 +114,15 @@ window.loading_screen = window.pleaseWait({
 		</div>
 	</div>
 </div>
-<div class="banner-bottom" >
-		<canvas class="canvas" style="position:absolute;"></canvas>
+<div class="banner-bottom">
 		<br>
 		<h4 class="latest-text w3_latest_text">فیلم های توصیه شده</h4>
-		<div class="container">
-			<div class="w3_agile_banner_bottom_grid">
-			<data-owl-carousel class="owl-carousel">
+		<div class="container" >
+			<div class="w3_agile_banner_bottom_grid"  >
+			<data-owl-carousel class="owl-carousel" data-options="{autoPlay: 3000, rewindNav : false}">
 				 <div owl-carousel-item="" ng-repeat="index in user_data.recom_movie" class="item">
 					 <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-						<img ng-src="../{{index.poster_address}}" title="album-name" class="img-responsive" alt=" " />
+						<img ng-src="../{{index.poster_address}}" title="album-name" style=' height: 300px; width: 200px;' class="img-responsive" alt=" " />
 						 <div class="mid-1 agileits_w3layouts_mid_1_home">
 							 <div class="w3l-movie-text">
 								 <h6>{{index.Title}}</h6>
@@ -131,7 +130,7 @@ window.loading_screen = window.pleaseWait({
 							 <div class="mid-2 agile_mid_2_home">
 								 <p>{{index.Year}}</p>
 								 <div class="block-stars">
- 								 		<div star-rating rating="starRating1" read-only="false" max-rating="5" click="rateMovie(index.movie_id,param)"></div>
+ 								 		<div star-rating rating="index.imdbRating" read-only="false" max-rating="5" click="rateMovie(index.movie_id,param)" value="3"></div>
 								 </div>
 								 <div class="clearfix">
 							 </div>

@@ -9,7 +9,8 @@ var get_routes = [
 ];
 var post_route = [
     '/login',
-    '/enroll'
+    '/enroll',
+    '/rate'
 ];
 module.exports = function(app) {
     app.get('/', function(req, res) {
