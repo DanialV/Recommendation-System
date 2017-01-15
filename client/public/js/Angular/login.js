@@ -36,7 +36,7 @@ login.controller('login_controller', function($scope, http) {
                 return toastr.error('اشکال داخلی سرور', 'خطا');
             }
             if (data.status == true) {
-                toastr.success(data.title, data.message);
+                toastr.success(data.message, data.title);
                 if (url == '/login')
                     setTimeout(function() {
                         location.replace('/')

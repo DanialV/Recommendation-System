@@ -43,41 +43,12 @@ app.controller('main_controller', function($scope, http) {
         $scope.user_data.session = data.session;
         $scope.user_data.navbar = true;
     });
-    $scope.send_login = function() {
-        http.post('/login', $scope.login_data, function(err, data) {
-            $scope.login_data = {};
-            if (err) {
-                return toastr.error('اشکال داخلی سرور', 'خطا');
-            }
-            if (data.status == true) {
-                $('#myModal').modal('toggle');
-                toastr.success('با موفقیت وارد شدید.', 'خوش آمدید.');
-            } else {
-                toastr.error('نام کاربری یا رمز عبور اشتباه است', 'خطا');
-            }
-
-        });
-    };
-    $scope.send_enroll = function() {
-        http.post('/enroll', $scope.enroll_data, function(err, data) {
-            $scope.enroll_data = {};
-            if (err) {
-                return toastr.error('اشکال داخلی سرور', 'خطا');
-            }
-            if (data.status == true) {
-                toastr.success(data.message);
-
-            } else {
-                toastr.error(data.message, 'خطا');
-            }
-        });
-    };
     $scope.logout = function() {
         http.get('/logout', {}, function(err, data) {
             if (err) {
                 return toastr.error('اشکال داخلی سرور', 'خطا');
             } else {
-                $scope.user_data.session = false;
+                location.replace('/');
             }
         });
     }
