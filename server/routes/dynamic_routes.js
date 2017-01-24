@@ -5,12 +5,15 @@
 var _route = require("djs");
 var get_routes = [
     '/init',
-    '/logout'
+    '/logout',
+    '/rated_movie',
+    '/core'
 ];
 var post_route = [
     '/login',
     '/enroll',
-    '/rate'
+    '/rate',
+    '/change_rate'
 ];
 module.exports = function(app) {
     app.get('/', function(req, res) {

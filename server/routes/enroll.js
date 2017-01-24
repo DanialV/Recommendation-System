@@ -11,7 +11,6 @@ var mongoose = require('mongoose');
 function CleanArray(arr) {
     let clean_arr = [];
     arr.forEach(function(index) {
-        let each_obj = index;
         clean_arr.push(index._id);
     });
     return clean_arr;
@@ -121,11 +120,9 @@ module.exports.post = function(req, res) {
     }
 
     function query_top_rated(res_data, cb) {
-        db.top_rated_movie.find({}, {
-            _id: true
-        }).sort({
-            'weight_rate': -1
-        }).limit(12).lean().exec(function(err, topRated) {
+        db.top_rated_movie.find().sort({
+            "weight_rate": -1
+        }).limit(30).lean().exec(function(err, topRated) {
             if (err) {
                 console.mongo('Error', err);
                 err.externalError = false;
@@ -155,22 +152,31 @@ module.exports.post = function(req, res) {
                 err.externalError = false;
                 return (cb(err, null));
             }
-            let rated_data = {
-                'user_id': userId._id.toString(),
-                'movie_rate': [],
-                'recom_movie': res_data.topRated
-            }
-            let temp = new db.rates(rated_data);
-            temp.save(function(err) {
+            db.rates.findOne({
+                user_id: "0"
+            }).lean().exec(function(err, info) {
                 if (err) {
                     console.mongo('Error', err);
                     err.externalError = false;
                     return (cb(err, null));
                 }
-                res_data = {
-                    'status': true
+                let rated_data = {
+                    'user_id': userId._id.toString(),
+                    'movie_rate': info.movie_rate,
+                    'recom_movie': res_data.topRated
                 }
-                return (cb(null, res_data));
+                let temp = new db.rates(rated_data);
+                temp.save(function(err) {
+                    if (err) {
+                        console.mongo('Error', err);
+                        err.externalError = false;
+                        return (cb(err, null));
+                    }
+                    res_data = {
+                        'status': true
+                    }
+                    return (cb(null, res_data));
+                });
             });
         });
     }

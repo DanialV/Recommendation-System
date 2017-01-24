@@ -21,6 +21,8 @@ module.exports = function(app) {
                 }
                 if (data == null) {
                     req.user.session = null;
+                    if (req.url != "/login" && req.url != '/enroll')
+                        return res.redirect('/login');
                     return next();
                 }
                 req.user.name = data.first_name + " " + data.last_name;

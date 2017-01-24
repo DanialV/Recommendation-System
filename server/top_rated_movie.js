@@ -11,6 +11,12 @@ db.getCollection('rates').aggregate([{
     }, {
         $unwind: "$movie_rate"
     }, {
+        "$match": {
+            "movie_rate.rate": {
+                $ne: parseInt("NaN")
+            }
+        }
+    }, {
         $group: {
             _id: "$movie_rate.movie_id",
             avg_r: {
@@ -20,30 +26,9 @@ db.getCollection('rates').aggregate([{
                 $sum: 1
             }
         }
-    }, {
-        $project: {
-            _id: 1,
-            avg_r: 1,
-            count_v: 1,
-            weight_rate: {
-                $divide: [{
-                    $add: [{
-                        $multiply: ["$count_v", "$avg_r"]
-                    }, {
-                        $multiply: [269.88909875877, 3.23889217791089]
-                    }]
-                }, {
-                    $add: ["$count_v", 269.88909875877]
-                }]
-            }
-        }
     },
     // sort
     {
-        $sort: {
-            weight_rate: -1
-        }
-    }, {
         $out: "top_rated_movie"
     }
 

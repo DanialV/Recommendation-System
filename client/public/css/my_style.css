@@ -7,22 +7,14 @@ header {
     top: 0;
     width: 100%;
     z-index:10;
-}
 
-#sidebar.affix-top {
-    position: static;
-}
-
-#sidebar.affix {
-    position: fixed;
-    top: 50px;
 }
 .navbar{
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 0
+  background:rgba(240,240,240,0.9);
+  border-radius: 0;
 }
-.navbar-default {
 
+.navbar-default {
   border: 0;
 }
 body > .inner {
@@ -89,22 +81,10 @@ h2,h3,h1,h5,h4{
     font-family: IRANSans, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif!important;;
 }
 .toast-message{
-  font-size: 12px;
   text-align: right;
 }
 .toast-title{
   text-align: right;
-}
-
-
-/***
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
-
-body {
-  background: #F1F3FA;
 }
 
 /* Profile container */
@@ -222,7 +202,4 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
 	background-color: #aaa;
-}
-.navbar{
-  border-radius: 0
 }

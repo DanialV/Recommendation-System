@@ -1,32 +1,79 @@
 var db = require('mongo_schemas');
 var async = require('async');
+var recom = require('recommended_movie');
 module.exports.post = function(req, res) {
     let data = req.body;
     //TODO:check input validation
-    //TODO:first find element with movie id then update or if result is null insert it to array
-    async.parallel([
-        function(cb) {
-            db.rates.update({
-                _id: req.user.session
-            }, {
-                'rate': data.rate,
-                'movie_id': data.movie_id
-            }, {
-                upsert: true
-            }, function(err) {
-                if (err) {
-                    console.mongo('Error', err);
-                    return (cb(err, null));
-                }
-                return (cb(null, true));
-            });
-        },
-        function(cb) {
-            db.update({
-                _id: user
-            })
+    async.waterfall([
+            //remove rate form array
+            function(cb) {
+                db.rates.update({
+                    user_id: req.user.session.toString()
+                }, {
+                    $pull: {
+                        movie_rate: {
+                            movie_id: data.movie_id
+                        }
+                    }
+                }, function(err, info) {
+                    if (err) {
+                        console.mongo('Error', err);
+                        return (cb(err, null));
+                    }
+                    cb(null, true);
+                });
+            },
+            //insert new rate to the array
+            function(res, cb) {
+                db.rates.update({
+                    user_id: req.user.session.toString()
+                }, {
+                    $push: {
+                        movie_rate: {
+                            'rate': data.rate,
+                            'movie_id': data.movie_id
+                        }
+                    }
+                }, function(err, info) {
+                    if (err) {
+                        console.mongo('Error', err);
+                        return (cb(err, null));
+                    }
+                    cb(null, true);
+                });
+            },
+            //delete recommende movie to show new movie in the recom list
+            function(res, cb) {
+                db.rates.update({
+                    user_id: req.user.session.toString()
+                }, {
+                    $pull: {
+                        recom_movie: data.movie_id
+                    }
+                }, function(err) {
+                    if (err) {
+                        console.mongo('Error', err);
+                        return (cb(err, null));
+                    }
+                    cb(null, true);
+                });
+            },
+            //get new movie for recommendation
+            function(res, cb) {
+                recom.get_recommended(req.user.session.toString(), function(err, data) {
+                    if (err) {
+                        console.mongo('Error', err);
+                        return (cb(err, null));
+                    }
+                    cb(null, data);
+                });
+            }
+        ],
+        function(err, result) {
+            if (err) {
+                return res.sendStatus(500);
+            }
+            return res.json(result);
         }
-    ], function(err, results) {
-
-    });
+    );
 };

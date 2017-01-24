@@ -1,9 +1,7 @@
-var app = angular.module('app', ['ngRoute', 'http_engine', 'star_rating', 'owl']);
+var app = angular.module('app', ['ngRoute', 'http_engine', 'star_rating', 'owl', 'user_rated_movie']);
 app.config(function($routeProvider) {});
-app.controller('main_controller', function($scope, http) {
-    $scope.user_data = {
-        'navbar': false
-    };
+app.controller('main_controller', function($scope, http, user_rated) {
+    $scope.user_data = {};
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -27,21 +25,19 @@ app.controller('main_controller', function($scope, http) {
         }
         if (data.session) {
             $scope.user_data.name = data.name;
-            let owl = $(".owl-carousel");
+            var owl = $("#owl1");
             owl.owlCarousel({
                 autoPlay: 3000,
                 itemsDesktop: [640, 4],
                 itemsDesktopSmall: [414, 3]
             });
             owl.data('owlCarousel').destroy();
-
             $scope.user_data.recom_movie = data.recom_movie;
-            $scope.user_data.recom_movie2 = [data.recom_movie[6], data.recom_movie[1],
-                data.recom_movie[2], data.recom_movie[3], data.recom_movie[4], data.recom_movie[5]
-            ];
         }
         $scope.user_data.session = data.session;
-        $scope.user_data.navbar = true;
+    });
+    user_rated.get(function(info) {
+        $scope.user_data.rated_movie = info;
     });
     $scope.logout = function() {
         http.get('/logout', {}, function(err, data) {
@@ -51,19 +47,52 @@ app.controller('main_controller', function($scope, http) {
             location.replace('/');
         });
     }
-
     $scope.rateMovie = function(movie_id, param) {
         var data = {};
         data.rate = param;
         data.movie_id = movie_id;
-        // http.post('/rate', data, function(err, data) {
-        //     if (err) {
-        //         return toastr.error('اشکال داخلی سرور', 'خطا');
-        //     }
-        //     if (data.status == true) {
-        //         toastr.success(data.message);
-        //     }
-        //
-        // });
+        http.post('/rate', data, function(err, data) {
+            if (err) {
+                return toastr.error('اشکال داخلی سرور', 'خطا');
+            }
+            if (data.status == true) {
+                toastr.success('امتیاز با موفقیت ثبت شد', 'ثبت');
+                var owl = $("#owl1");
+                owl.data('owlCarousel').destroy();
+                $scope.user_data.recom_movie = data.recom_movie;
+                user_rated.get(function(info) {
+                    $scope.user_data.rated_movie = info;
+                });
+
+            }
+        });
+    }
+    $scope.change_rate = function(movie_id, param) {
+        var data = {};
+        data.rate = param;
+        data.movie_id = movie_id;
+        http.post('/change_rate', data, function(err, data) {
+            if (err) {
+                return toastr.error('اشکال داخلی سرور', 'خطا');
+            }
+            if (data.status == true) {
+                toastr.info('امتیاز با موفقیت تغییر کرد', 'ویرایش');
+            }
+        });
+    }
+    $scope.update_recom = function() {
+        http.get('/core', function(err, data) {
+            if (err) {
+                return toastr.error('اشکال داخلی سرور', 'خطا');
+            }
+            var owl = $("#owl1");
+            owl.owlCarousel({
+                autoPlay: 3000,
+                itemsDesktop: [640, 4],
+                itemsDesktopSmall: [414, 3]
+            });
+            owl.data('owlCarousel').destroy();
+            $scope.user_data.recom_movie = data.recom_movie;
+        })
     }
 });

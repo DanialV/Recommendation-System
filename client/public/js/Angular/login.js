@@ -37,10 +37,13 @@ login.controller('login_controller', function($scope, http) {
             }
             if (data.status == true) {
                 toastr.success(data.message, data.title);
-                if (url == '/login')
+                if (url == '/login') {
                     setTimeout(function() {
                         location.replace('/')
                     }, 1000);
+                } else {
+                    $scope.form_trigger();
+                }
 
             } else {
                 toastr.error(data.message, 'خطا');

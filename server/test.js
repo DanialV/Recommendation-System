@@ -12,42 +12,26 @@ database.once('open', function() {
     console.log("connected to mongodb");
 });
 var db = require('mongo_schemas');
-let temp = [
-    "318",
-    "858",
-    "527",
-    "1198",
-    "260",
-    "50",
-    "2762",
-    "750",
-    "912",
-    "593",
-    "2858",
-    "2028",
-    "1193",
-    "904",
-    "2571",
-    "1148",
-    "1196",
-    "1221",
-    "1197",
-    "908"
-]
-let result = [];
-async.each(temp, function(index, cb) {
-    db.movie_info.findOne({
-        'movie_id': index
-    }).lean().exec(function(err, info) {
-        if (err) {
-            console.log("Mongo Error");
-            cb(err);
+var aggregation = db.rates.aggregate(
+    [{
+        $match: {
+            $or: [{
+                user_id: "5883d61562d3cd4a0ba199cd"
+            }, {
+                user_id: "2"
+            }]
         }
-        result.push(info);
-        cb();
-    });
-}, function(err) {
-
-    console.log(result);
+    }, {
+        $project: {
+            _id: 0,
+            'movie_id': "$movie_rate.movie_id",
+            'rate': "$movie_rate.rate"
+        }
+    }]);
+aggregation.options = {
+    allowDiskUse: true
+};
+aggregation.exec(function(err, info) {
+    console.log(info);
     database.close();
-})
+});
