@@ -11,7 +11,7 @@ module.exports.get = function(req, res) {
     }, {
         "$match": {
             "movie_rate.rate": {
-                $ne: parseInt("NaN")
+                $ne: null
             }
         }
     }]).exec(function(err, indexes) {

@@ -81,10 +81,11 @@ app.controller('main_controller', function($scope, http, user_rated) {
         });
     }
     $scope.update_recom = function() {
-        http.get('/core', function(err, data) {
+        http.get('/core', {}, function(err, data) {
             if (err) {
                 return toastr.error('اشکال داخلی سرور', 'خطا');
             }
+            console.log(data.recom_movie);
             var owl = $("#owl1");
             owl.owlCarousel({
                 autoPlay: 3000,

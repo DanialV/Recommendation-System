@@ -4,35 +4,16 @@ var recom = require('recommended_movie');
 module.exports.post = function(req, res) {
     let data = req.body;
     //TODO:check input validation
+    console.log(data);
     async.waterfall([
             //remove rate form array
             function(cb) {
                 db.rates.update({
-                    user_id: req.user.session.toString()
+                    user_id: req.user.session.toString(),
+                    "movie_rate.movie_id": data.movie_id
                 }, {
-                    $pull: {
-                        movie_rate: {
-                            movie_id: data.movie_id
-                        }
-                    }
-                }, function(err, info) {
-                    if (err) {
-                        console.mongo('Error', err);
-                        return (cb(err, null));
-                    }
-                    cb(null, true);
-                });
-            },
-            //insert new rate to the array
-            function(res, cb) {
-                db.rates.update({
-                    user_id: req.user.session.toString()
-                }, {
-                    $push: {
-                        movie_rate: {
-                            'rate': data.rate,
-                            'movie_id': data.movie_id
-                        }
+                    $set: {
+                        "movie_rate.$.rate": data.rate
                     }
                 }, function(err, info) {
                     if (err) {
