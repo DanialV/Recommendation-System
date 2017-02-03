@@ -75,7 +75,6 @@ fs.readFile('ratings.dat', 'utf8', function(err, data) {
             }
         }
     });
-    console.log(final_data);
     final_data.forEach(function(index) {
         db.rates.create(index, function(err) {
             if (err) {

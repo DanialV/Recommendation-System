@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'http_engine', 'star_rating', 'owl', 'user_rated_movie']);
+var app = angular.module('app', ['ngRoute', 'http_engine', 'star_rating', 'owl', 'user_rated_movie', 'angularSpinner']);
 app.config(function($routeProvider) {});
 app.controller('main_controller', function($scope, http, user_rated) {
     $scope.user_data = {};
@@ -81,6 +81,12 @@ app.controller('main_controller', function($scope, http, user_rated) {
         });
     }
     $scope.update_recom = function() {
+        $scope.disable_recom = {
+            'pointer-events': 'none',
+            'opacity': 0.5,
+            '-webkit-transition': '.5s ease-in',
+            'transition': '.5s ease-in'
+        }
         http.get('/core', {}, function(err, data) {
             if (err) {
                 return toastr.error('اشکال داخلی سرور', 'خطا');
@@ -94,6 +100,17 @@ app.controller('main_controller', function($scope, http, user_rated) {
             });
             owl.data('owlCarousel').destroy();
             $scope.user_data.recom_movie = data.recom_movie;
+            $scope.disable_recom = {
+                'opacity': 1,
+                '-webkit-transition': '.5s ease-in',
+                'transition': '.5s ease-in'
+            }
         })
+    }
+    $scope.poster_name = function(name) {
+        return (typeof name == "undefined") ? '../images/no_poster.jpg' : name;
+    }
+    $scope.movie_info = function(result) {
+        $scope.each_movie = result;
     }
 });

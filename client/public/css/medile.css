@@ -5,11 +5,14 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 html, body{
+    font-size: 100%;
+font-family: 'Roboto Condensed', sans-serif;
 	background:#ffffff;
 	margin: 0;
 }
 p,ul li,ol li{
 	margin:0;
+	font-size:14px;
 }
 h1,h2,h3,h4,h5,h6{
 	margin:0;
@@ -124,8 +127,7 @@ ul#myTab {
     font-size: 3em;
     color: #fff;
 }
-.w3l-movie-gride-agile:hover .w3l-action-icon {
-
+.w3l-movie-gride-agile:hover .w3l-action-icon  {
     display: block;
     position: absolute;
     top: 37%;
@@ -136,7 +138,6 @@ ul#myTab {
 }
 .w3l-movie-gride-agile{
 	position:relative;
-  float: right !important;
 }
 .w3l-action-icon{
 	display:none;
@@ -244,9 +245,9 @@ i.glyphicon.glyphicon-play-circle {
     color: #fff;
     font-size: 3em;
 }
-/*.w3l-movie-gride-agile img:hover {
+.w3l-movie-gride-agile img:hover {
     opacity: 0.5;
-}*/
+}
 .ribben {
   position: absolute;
     top: 3%;
@@ -284,14 +285,14 @@ i.glyphicon.glyphicon-play-circle {
     box-shadow: 0px 0px 1px #999;
 }
 h4.latest-text {
-    border-right: 5px solid #ff8d1b;
+      border-right: 5px solid #ff8d1b;
     font-size: 2em;
     color: #212121;
     text-transform: uppercase;
     margin-bottom: 1em;
     padding: 0.3em 0.5em;
     margin-right: 3em;
-    text-align: right;
+		text-align: right;
 }
 .review-slider {
     margin: 1.4em 0 1.4em 0;

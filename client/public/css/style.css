@@ -308,6 +308,7 @@ p.fexi_header_para1 a i {
 	background:#212121;
 	padding:4em 0;
 }
+
 .w3ls_footer_grid_left1{
 	position:relative;
 }
@@ -605,9 +606,7 @@ li.list-group-item1 {
     color: #212121;
     font-weight: bold;
 }
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-	border-top: none !important;
-}
+
 .tab-content > .active {
 	display: block;
 	visibility: visible;
@@ -646,14 +645,8 @@ section#tables  p {
 	padding: 16px;
 	background-color: #ffffff;
 }
-.table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-	padding: 15px!important;
-}
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-	font-size: 0.9em;
-	color: #999;
-	border-top: none !important;
-}
+
+
 .tab-content > .active {
 	display: block;
 	visibility: visible;
@@ -738,63 +731,7 @@ h2.typoh2{
 		padding-right: 1em;
 	}
 }
-@media (max-width:480px){
-	.grid_5 h3, .grid_5 h2, .grid_5 h1, .grid_5 h4, .grid_5 h5, h3.hdg, h3.bars {
-		font-size: 1.2em;
-	}
-	.table h1 {
-		font-size: 26px;
-	}
-	.table h2 {
-		font-size: 23px;
-	}
-	.table h3 {
-		font-size: 20px;
-	}
-	.label {
-		font-size: 53%;
-	}
-	.alert,p {
-		font-size: 14px;
-	}
-	.pagination {
-		margin: 20px 0 0px;
-	}
-	.grid_3.grid_4.w3layouts {
-		margin-top: 0;
-	}
-}
-@media (max-width: 320px){
-	.grid_4 {
-		margin-top: 18px;
-	}
-	h3.title {
-		font-size: 1.6em;
-	}
-	.alert, p,ol.breadcrumb li, .grid_3 p,.well, ul.list-group li, li.list-group-item1,a.list-group-item {
-		font-size: 13px;
-	}
-	.alert {
-		padding: 10px;
-		margin-bottom: 10px;
-	}
-	ul.pagination li a {
-		font-size: 14px;
-		padding: 5px 11px;
-	}
-	.list-group {
-		margin-bottom: 10px;
-	}
-	.well {
-		padding: 10px;
-	}
-	.nav > li > a {
-		font-size: 14px;
-	}
-	table.table.table-striped,.table-bordered,.bs-docs-example {
-		display: none;
-	}
-}
+
 /*-- icons --*/
 .codes a {
     color: #999;

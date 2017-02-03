@@ -4,7 +4,6 @@ var recommended = require('recommended_movie');
 module.exports.get = function(req, res) {
     var _process = spawn('python3', ["Backend/CF.py", req.user.session]);
     _process.stdout.on('data', function(data) {
-        console.log(data.toString());
         recommended.get_recommended(req.user.session.toString(), function(err, data) {
             if (err) {
                 if (err.status == false) {

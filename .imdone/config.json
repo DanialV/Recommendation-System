@@ -1,0 +1,132 @@
+{
+  "exclude": [
+    "^(node_modules|bower_components|\\.imdone|target|build|dist|logs)[\\/\\\\]?|\\.(git|svn|hg|npmignore)|\\~$|\\.(jpg|png|gif|swp|ttf|otf)$"
+  ],
+  "watcher": true,
+  "keepEmptyPriority": false,
+  "code": {
+    "include_lists": [
+      "TODO",
+      "DOING",
+      "DONE",
+      "PLANNING",
+      "FIXME",
+      "ARCHIVE",
+      "HACK",
+      "CHANGED",
+      "XXX",
+      "IDEA",
+      "NOTE",
+      "REVIEW",
+      "26",
+      "27",
+      "28",
+      "21",
+      "22",
+      "24",
+      "17",
+      "10",
+      "11290",
+      "8152",
+      "10093",
+      "9682",
+      "1450",
+      "14683",
+      "84"
+    ]
+  },
+  "lists": [
+    {
+      "name": "26",
+      "hidden": false
+    },
+    {
+      "name": "27",
+      "hidden": false
+    },
+    {
+      "name": "28",
+      "hidden": false
+    },
+    {
+      "name": "21",
+      "hidden": false
+    },
+    {
+      "name": "22",
+      "hidden": false
+    },
+    {
+      "name": "24",
+      "hidden": false
+    },
+    {
+      "name": "17",
+      "hidden": false
+    },
+    {
+      "name": "10",
+      "hidden": false
+    },
+    {
+      "name": "TODO",
+      "hidden": false
+    },
+    {
+      "name": "NOTE",
+      "hidden": false
+    },
+    {
+      "name": "FIXME",
+      "hidden": false
+    },
+    {
+      "name": "XXX",
+      "hidden": false
+    },
+    {
+      "name": "11290",
+      "hidden": false
+    },
+    {
+      "name": "8152",
+      "hidden": false
+    },
+    {
+      "name": "10093",
+      "hidden": false
+    },
+    {
+      "name": "9682",
+      "hidden": false
+    },
+    {
+      "name": "1450",
+      "hidden": false
+    },
+    {
+      "name": "14683",
+      "hidden": false
+    },
+    {
+      "name": "Features",
+      "hidden": false
+    },
+    {
+      "name": "84",
+      "hidden": false
+    },
+    {
+      "name": "PLANNING",
+      "hidden": false
+    }
+  ],
+  "marked": {
+    "gfm": true,
+    "tables": true,
+    "breaks": false,
+    "pedantic": false,
+    "smartLists": true,
+    "langPrefix": "language-"
+  }
+}

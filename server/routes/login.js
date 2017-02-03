@@ -52,6 +52,7 @@ module.exports.post = function(req, res) {
                     }
                     console.mongo('Info', 'Unsuccessful login wrong password Username : ' + user_data.username);
                     res_data.status = false;
+                    res_data.message = 'نام‌کاربری‌ یا رمز‌عبور اشتباه است.';
                     return (callback(res_data, null));
                 });
             });
