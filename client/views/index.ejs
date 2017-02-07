@@ -46,7 +46,7 @@
 	<link rel="stylesheet" href="../bower/owl-carousel/owl-carousel/owl.theme.css" />
 	<link rel="stylesheet" href="../bower/owl-carousel/owl-carousel/owl.transitions.css" />
 	<!-- //banner-bottom-plugin -->
-	<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+	<!-- <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'> -->
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="../js/move-top.js"></script>
 	<script type="text/javascript" src="../js/easing.js"></script>
@@ -209,7 +209,7 @@
 		<h4 class="latest-text w3_latest_text">فیلم های توصیه شده</h4>
 		<div class="container">
 			<div class="w3_agile_banner_bottom_grid" ng-style="disable_recom">
-				<data-owl-carousel id="owl1" class="owl-carousel" data-options="{navigation: true, autoPlay: 3000}">
+				<data-owl-carousel id="owl1" class="owl-carousel" data-options="{navigation: true}">
 					<div owl-carousel-item="" ng-repeat="index in user_data.recom_movie" class="item">
 						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
 							<a href='' data-toggle="modal" data-target="#myModal" ng-click='movie_info(index)' class="hvr-shutter-out-horizontal">
@@ -242,7 +242,7 @@
 		<div class="container">
 			<div class="w3_agile_banner_bottom_grid">
 
-				<data-owl-carousel id="owl2" class="owl-carousel" data-options="{navigation: true, autoPlay: 3000}">
+				<data-owl-carousel id="owl2" class="owl-carousel" data-options="{navigation: true}">
 					<div owl-carousel-item="" ng-repeat="index in user_data.rated_movie" class="item">
 						<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
 							<a href='' data-toggle="modal" data-target="#myModal" ng-click='movie_info(index)' class="hvr-shutter-out-horizontal">

@@ -4,9 +4,10 @@ module.exports.get = function(req, res) {
         if (err) {
             if (err.status == false) {
                 return res.json(err);
+            } else {
+                console.mongo('Error', err);
+                return res.sendStatus(500);
             }
-            console.mongo('Error', err);
-            return res.sendStatus(500);
         } else {
             return res.json({
                 'session': req.user.session,

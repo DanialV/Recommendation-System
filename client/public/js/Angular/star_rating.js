@@ -12,7 +12,7 @@ config.directive('starRating', function() {
         },
         restrict: 'EA',
         template: "<div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' ng-repeat='idx in maxRatings track by $index'> \
-                    <img ng-src='{{((hoverValue + _rating) <= $index) && \"http://www.codeproject.com/script/ratings/images/star-empty-lg.png\" || \"http://www.codeproject.com/script/ratings/images/star-fill-lg.png\"}}' \
+                    <img ng-src='{{((hoverValue + _rating) <= $index) && \"../images/empty_star.png\" || \"../images/full_star.png\"}}' \
                     ng-Click='isolatedClick($index + 1)' \
                     ng-mouseenter='isolatedMouseHover($index + 1)' \
                     ng-mouseleave='isolatedMouseLeave($index + 1)'></img> \
